@@ -44,16 +44,7 @@ public class Health : MonoBehaviour
     } 
      void OnTriggerEnter2D(Collider2D other){
         //if collide with rain, decrease health
-        if(other.CompareTag("rain")){
-            Destroy(other.gameObject);
-            if(health > 0){
-                health -= .1f;
-                healthBar.localScale = new Vector2 (health, 1);
-                size-=0.07f;
-                transform.localScale = new Vector2(size,size);
-            }
-        }
-
+        
         //if collide with rain, increase health
         if(other.CompareTag("log")){
             Destroy(other.gameObject);
@@ -80,6 +71,22 @@ public class Health : MonoBehaviour
             
             Invoke("Restart", 4);
         }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("rain"))
+        {
+            //Destroy(other. );
+            if (health > 0)
+            {
+                health -= .1f;
+                healthBar.localScale = new Vector2(health, 1);
+                size -= 0.07f;
+                transform.localScale = new Vector2(size, size);
+            }
+        }
+
     }
 
     void TryAgain(){
